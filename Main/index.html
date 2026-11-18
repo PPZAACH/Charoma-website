@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset=utf8>
+  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      color: #000
+    }
+
+    img {
+      max-width: 100%
+    }
+
+    [hidden]:not([hidden=until-found i]) {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body>
+  <title>ขวดน้ำหอมก้านไม้</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <main class="stage" id="stage">
+    <div class="head">
+      <p class="eyebrow">ขวดแก้วใส · ลายเส้นใบชา</p>
+      <h1>Custom Model</h1>
+      <p class="size" id="bottle-size-desc">ขนาดตัวอย่าง สูงราว 14 ซม. กว้าง 8 ซม.</p>
+    </div>
+    <p class="hint">ลากเพื่อหมุน · เลื่อนล้อเมาส์หรือบีบนิ้วเพื่อซูม</p>
+    <p class="nogl" id="nogl" hidden>เบราว์เซอร์นี้แสดงโมเดล 3 มิติ (WebGL) ไม่ได้ ลองเปิดด้วย Chrome, Safari หรือ
+      Firefox รุ่นล่าสุด</p>
+  </main>
+
+  <section class="panel" aria-label="ปรับแต่งโมเดล">
+    <div class="group">
+      <label class="label" for="scent">กลิ่น</label>
+      <input id="scent" class="txt" type="text" maxlength="14" value="Scent 7" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="group">
+      <span class="label" id="bottle-size-label">ขนาดขวด</span>
+      <div class="seg" role="group" aria-labelledby="bottle-size-label">
+        <button type="button" data-size="tall" aria-pressed="true">ทรงสูง (14 ซม.)</button>
+        <button type="button" data-size="wide" aria-pressed="false">ทรงกว้าง (8 ซม.)</button>
+      </div>
+    </div>
+    <div class="group">
+      <span class="label" id="ink-label">สีลายเส้น · <b id="ink-name"></b></span>
+      <div class="swatches" id="ink-swatches" role="group" aria-labelledby="ink-label"></div>
+    </div>
+    <div class="group">
+      <span class="label" id="glass-label">สีแก้ว · <b id="glass-name"></b></span>
+      <div class="swatches" id="glass-swatches" role="group" aria-labelledby="glass-label"></div>
+    </div>
+    <div class="group">
+      <span class="label" id="stick-label">สีก้าน</span>
+      <div class="seg" role="group" aria-labelledby="stick-label">
+        <button type="button" data-stick="dark" aria-pressed="false">เทาเข้ม</button>
+        <button type="button" data-stick="natural" aria-pressed="true">หวายธรรมชาติ</button>
+      </div>
+    </div>
+    <div class="group">
+      <span class="label" id="leaf-label">รูปแบบก้าน</span>
+      <div class="seg" role="group" aria-labelledby="leaf-label">
+        <button type="button" data-leaf="plain" aria-pressed="false">ก้านเรียบ</button>
+        <button type="button" data-leaf="leafy" aria-pressed="true">ก้านมีใบ</button>
+      </div>
+    </div>
+    <div class="group" id="leaf-color-group">
+      <span class="label" id="leaf-color-label">สีใบไม้ · <b id="leaf-color-name"></b></span>
+      <div class="swatches" id="leaf-swatches" role="group" aria-labelledby="leaf-color-label"></div>
+    </div>
+    <div class="group">
+      <label class="label" for="count">จำนวนก้าน · <b id="count-val">6</b></label>
+      <input id="count" type="range" min="3" max="7" step="1" value="6">
+    </div>
+    <label class="spin"><input id="spin" type="checkbox"> หมุนอัตโนมัติ</label>
+    <button type="button" id="save-png" class="save-btn">⬇ บันทึก PNG</button>
+    <button type="button" id="save-preset" class="save-btn preset-btn">＋ บันทึก Preset</button>
+  </section>
+
+  <section class="preset-panel" id="preset-panel" aria-label="Presets ที่บันทึกไว้">
+    <div class="preset-header">
+      <span class="label">Presets ที่บันทึกไว้</span>
+      <span class="preset-empty" id="preset-empty">ยังไม่มี preset</span>
+    </div>
+    <div class="preset-list" id="preset-list"></div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>
